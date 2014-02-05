@@ -9,65 +9,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <Button 
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:text="I'm a button"
-        />
-    
-    <EditText 
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        />
-    
-    <RadioGroup
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:orientation="vertical">
-    	<RadioButton
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="I'm button 2"
-        	/>
-    	<RadioButton
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="I'm button 1"
-        	/>
-	</RadioGroup>
-    
-        <RadioGroup
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:orientation="vertical">
-    	<RadioButton
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="I'm button 2"
-        	/>
-    	<RadioButton
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:text="I'm button 1"
-        	/>
-	</RadioGroup>
-    
-    <ToggleButton 
+	<Button 
 	    android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:textOn="I'm a toggle button in the on state"
-    	android:textOff="I'm a toggle button in the off state"
+	    android:layout_height="wrap_content"
+	    android:text="show toast"
+	    android:onClick="showToast"
 	    />
-    
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I'm a check box"
-        />
+	<EditText
+	    android:id="@+id/input_text"
+	    android:layout_width="100dp"
+	    android:layout_height="wrap_content"
+	    />
+	<TextView
+	    android:id="@+id/output_text"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="this is my output text"
+	    />
     
 </LinearLayout>
