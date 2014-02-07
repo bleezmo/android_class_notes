@@ -1,13 +1,17 @@
 package com.example.class_notes;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,13 +57,20 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Toast.makeText(this, "menu option selected", Toast.LENGTH_SHORT).show();
 		if(item.getItemId() == R.id.clear_text){
-			et.setText("");
-			tv.setText("");
+			et.setText("hello");
+			tv.setText("hello");
 		}else if(item.getItemId() == R.id.action_settings){
 			Intent intent = new Intent(this,SettingsActivity.class);
 			startActivity(intent);
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void displayFavoritePlanet(View view){
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		Log.i("MainActivity","favorie planet view parameter: "+view.getClass().getName());
+		String favoritePlanet = prefs.getString("favorite_planets", "None");
+		Toast.makeText(this, "Your favorite planet is "+favoritePlanet, Toast.LENGTH_SHORT).show();
 	}
     
 }

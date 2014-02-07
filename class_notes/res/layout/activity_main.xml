@@ -26,5 +26,12 @@
 	    android:layout_height="wrap_content"
 	    android:text="this is my output text"
 	    />
+	<Button
+	    android:id="@+id/show_favorite_planet"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Display Favorite Planet"
+	    android:onClick="displayFavoritePlanet"
+	    ></Button>
     
 </LinearLayout>
