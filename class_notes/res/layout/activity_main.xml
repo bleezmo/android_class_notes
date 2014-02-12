@@ -1,37 +1,43 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
-
-	<Button 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="show toast"
-	    android:onClick="showToast"
-	    />
-	<EditText
-	    android:id="@+id/input_text"
-	    android:layout_width="100dp"
-	    android:layout_height="wrap_content"
-	    />
-	<TextView
-	    android:id="@+id/output_text"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="this is my output text"
-	    />
-	<Button
-	    android:id="@+id/show_favorite_planet"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="Display Favorite Planet"
-	    android:onClick="displayFavoritePlanet"
-	    ></Button>
+    android:layout_height="match_parent">
     
-</LinearLayout>
+    <TextView 
+        android:id="@+id/greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="This is my relative layout"
+        android:layout_marginBottom="40dp"
+        />
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/greeting"
+        android:layout_alignParentLeft="true"
+        android:hint="set up email"
+        android:inputType="textEmailAddress"
+        />
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/email"
+        android:layout_alignTop="@id/email"
+        android:hint="type in password"
+        android:inputType="textPassword"
+        />
+    
+    <Button 
+        android:id="@+id/toLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To Linear Layout"
+        android:layout_below="@id/email"
+        android:layout_alignParentRight="true"
+        android:onClick="toLinearLayout"
+        android:layout_marginTop="50dp"
+        />
+</RelativeLayout>

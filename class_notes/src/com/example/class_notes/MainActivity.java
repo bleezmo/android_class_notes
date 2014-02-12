@@ -17,60 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	private TextView tv;
-	private EditText et;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        et = (EditText) findViewById(R.id.input_text);
-        tv = (TextView) findViewById(R.id.output_text);
-        et.addTextChangedListener(new TextWatcher(){
-			@Override
-			public void afterTextChanged(Editable s) {
-
-			}
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-
-			}
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				tv.setText(s);
-			}});
     }
     
-    public void showToast(View view){
-    	Toast.makeText(this, "My first Toast!", Toast.LENGTH_SHORT).show();
+    public void toLinearLayout(View view){
+    	Intent intent = new Intent(this,LinearLayoutActivity.class);
+    	startActivity(intent);
     }
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Toast.makeText(this, "menu option selected", Toast.LENGTH_SHORT).show();
-		if(item.getItemId() == R.id.clear_text){
-			et.setText("hello");
-			tv.setText("hello");
-		}else if(item.getItemId() == R.id.action_settings){
-			Intent intent = new Intent(this,SettingsActivity.class);
-			startActivity(intent);
-		}
-		return super.onOptionsItemSelected(item);
-	}
-	
-	public void displayFavoritePlanet(View view){
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		Log.i("MainActivity","favorie planet view parameter: "+view.getClass().getName());
-		String favoritePlanet = prefs.getString("favorite_planets", "None");
-		Toast.makeText(this, "Your favorite planet is "+favoritePlanet, Toast.LENGTH_SHORT).show();
-	}
-    
 }
