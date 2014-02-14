@@ -12,5 +12,6 @@
         android:layout_below="@id/lbl"
         android:text="Button blah"
 		style="@style/Button"
+		android:onClick="toNewActivity"
         />
 </RelativeLayout>
