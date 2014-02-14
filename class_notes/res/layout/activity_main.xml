@@ -1,43 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+
     <TextView 
-        android:id="@+id/greeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="This is my relative layout"
-        android:layout_marginBottom="40dp"
+        android:id="@+id/lbl"
+        android:text="blah blah blah"
+		style="@style/Label"
         />
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/greeting"
-        android:layout_alignParentLeft="true"
-        android:hint="set up email"
-        android:inputType="textEmailAddress"
-        />
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/email"
-        android:layout_alignTop="@id/email"
-        android:hint="type in password"
-        android:inputType="textPassword"
-        />
-    
-    <Button 
-        android:id="@+id/toLinearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="To Linear Layout"
-        android:layout_below="@id/email"
-        android:layout_alignParentRight="true"
-        android:onClick="toLinearLayout"
-        android:layout_marginTop="50dp"
+    <Button
+        android:id="@+id/btn"
+        android:layout_below="@id/lbl"
+        android:text="Button blah"
+		style="@style/Button"
         />
 </RelativeLayout>

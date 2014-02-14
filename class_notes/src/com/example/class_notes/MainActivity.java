@@ -23,9 +23,4 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    
-    public void toLinearLayout(View view){
-    	Intent intent = new Intent(this,LinearLayoutActivity.class);
-    	startActivity(intent);
-    }
 }
