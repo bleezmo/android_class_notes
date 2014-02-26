@@ -1,1 +1,3 @@
-Hey folks, this is some notes
+Learn about Threads
+The rules of threads
+asynctask vs regular threads

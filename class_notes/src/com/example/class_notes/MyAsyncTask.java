@@ -6,9 +6,6 @@ import android.widget.Toast;
 
 public class MyAsyncTask extends AsyncTask<Void,Void,Void>{
 
-	public interface OnFinishedListener{
-		public void onFinished();
-	}
 	private OnFinishedListener listener;
 
 	public MyAsyncTask(OnFinishedListener listener){

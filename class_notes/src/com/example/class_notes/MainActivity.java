@@ -4,6 +4,7 @@ import utils.Either;
 import utils.Failure;
 import utils.Success;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Context;
@@ -20,7 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements MyAsyncTask.OnFinishedListener{
+public class MainActivity extends Activity implements OnFinishedDownloadListener{
 	private static class MyRunnable implements Runnable{
 		private Activity ctx;
 		public MyRunnable(Activity ctx){
@@ -48,13 +49,21 @@ public class MainActivity extends Activity implements MyAsyncTask.OnFinishedList
         //We knowthis code fails because it attempts to edit the ui threa
         //(new Thread(new MyRunnable(this))).start();
         
-        new MyAsyncTask(this).execute();
+        //AsyncTask version. this will run just fine
+        //new MyAsyncTask(this).execute();
+        Handler h = new Handler();
+        new Thread(new MyLongRunningThread(h,this)).start();
     }
 	@Override
 	public void onFinished() {
-		Toast.makeText(this, "Toasty toast is toasting", Toast.LENGTH_SHORT).show();
+		Toast.makeText(MainActivity.this, "Toasty toast is toasting", Toast.LENGTH_SHORT).show();
 		TextView tv = (TextView) findViewById(R.id.lbl);
 		tv.setText("The text is different. Look at meeee!!!!");
+	}
+	@Override
+	public void onFinishedDownload(String text) {
+		TextView tv = (TextView) findViewById(R.id.lbl);
+		tv.setText(text);
 	}
 
 }
