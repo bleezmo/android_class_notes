@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="List View with items that are clickable"
+	    />
+	<Button
+	    android:id="@+id/to_custom_lv"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:onClick="toCustomLV"
+	    android:text="Go to custom List View"
+	    />
+	<ListView 
+	    android:id="@+id/eventslist"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    ></ListView>
+</LinearLayout>
