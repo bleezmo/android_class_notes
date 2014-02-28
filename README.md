@@ -1,3 +1,1 @@
-Learn about Threads
-The rules of threads
-asynctask vs regular threads
+* Added steps for thread-creation in comments in MainActivity

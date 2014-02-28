@@ -4,6 +4,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+/**
+ * @author josh
+ *
+ */
 public class MyAsyncTask extends AsyncTask<Void,Void,Void>{
 
 	private OnFinishedListener listener;

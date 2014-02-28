@@ -4,7 +4,10 @@ import utils.Downloader;
 import utils.Either;
 import android.os.Handler;
 import android.util.Log;
-
+/**
+ * @author josh
+ *
+ */
 public class MyLongRunningThread implements Runnable{
 
 	private OnFinishedDownloadListener listener;
