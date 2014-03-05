@@ -2,6 +2,7 @@ package com.example.class_notes;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -53,6 +54,11 @@ public class ListOfEvents extends Activity{
 			}
 			
 		});		
+	}
+	
+	public void toCustomLV(View v){
+		Intent intent = new Intent(this,CustomListView.class);
+		startActivity(intent);
 	}
 
 }

@@ -52,5 +52,8 @@ public class MainActivity extends Activity{
     	Intent intent = new Intent(this,ListOfEvents.class);
     	startActivity(intent);
     }
-
+    public void toSampleList(View view){
+    	Intent intent = new Intent(this,AnotherSampleList.class);
+    	startActivity(intent);
+    }
 }
