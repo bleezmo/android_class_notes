@@ -1,7 +1,13 @@
 package com.example.class_notes;
 
+import java.io.IOException;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import utils.Downloader;
 import utils.Either;
 import utils.Failure;
+import utils.MyPullParser;
 import utils.Success;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,26 +40,27 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //the list view to be populated with items
-        ListView lv = (ListView) findViewById(R.id.staticlv);
-        //our array of items
-        String[] planets = getResources().getStringArray(R.array.planets_array);
-        //adapter to be added to the list view which contains array of items
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-        		this,
-        		android.R.layout.simple_list_item_1,
-        		planets
-        );
-        //set the adapter
-        lv.setAdapter(adapter);
+        (new Thread(new Runnable(){
+			@Override
+			public void run() {
+				final Either<StringBuffer> optbuf = Downloader.downloadText("http://cis228.herokuapp.com/assets/objectives.txt");
+				if(optbuf.isSuccess()){
+					MainActivity.this.runOnUiThread(new Runnable(){
+						@Override
+						public void run() {
+							TextView tv = (TextView) findViewById(R.id.mytxt);
+							tv.setText(optbuf.getObject().toString());
+						}
+					});
+				}else{
+					try {
+						throw optbuf.getError();
+					} catch (Throwable e) {
+						e.printStackTrace();
+					}
+				}
+			}
+        })).start();
     }
     
-    public void toListEvents(View view){
-    	Intent intent = new Intent(this,ListOfEvents.class);
-    	startActivity(intent);
-    }
-    public void toSampleList(View view){
-    	Intent intent = new Intent(this,AnotherSampleList.class);
-    	startActivity(intent);
-    }
 }

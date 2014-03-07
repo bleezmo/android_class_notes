@@ -1,2 +1,2 @@
-* Custom list view with custom list adapter
-* Sample review list
+* Added xml pull parser
+* Gave example for downloading text from url off internet
