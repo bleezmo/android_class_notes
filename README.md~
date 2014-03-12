@@ -1,2 +1,2 @@
-* Custom list view with custom list adapter
-* Sample review list
+* Modified pull parser. Remember the original code from pull parser was taken from http://developer.android.com/reference/org/xmlpull/v1/XmlPullParser.html
+* 

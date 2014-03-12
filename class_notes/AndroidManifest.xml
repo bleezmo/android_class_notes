@@ -23,18 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.class_notes.ListOfEvents" >
-        </activity>
-        <activity android:name="com.example.class_notes.CustomListView" >
-        </activity>
-        <activity
-            android:name="com.example.class_notes.ItemDescriptionActivity"
-            android:label="@string/title_activity_item_description" >
-        </activity>
-        <activity
-            android:name="com.example.class_notes.AnotherSampleList"
-            android:label="@string/title_activity_another_sample_list" >
-        </activity>
+		<activity android:name="com.example.class_notes.DescriptionActivity"></activity>
     </application>
 
 </manifest>
