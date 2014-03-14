@@ -2,13 +2,15 @@ package com.example.class_notes;
 
 import java.io.IOException;
 
-import org.xmlpull.v1.XmlPullParserException;
-import utils.MyPullParser;
+import utils.Downloader;
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -22,46 +24,24 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        (new Thread(new Runnable(){
+        final Handler mainHandler = new Handler();
+        new Thread(new Runnable(){
 			@Override
 			public void run() {
-				try {
-					final MyPullParser parser = new MyPullParser();
-					parser.parse("http://rss.cnn.com/rss/cnn_topstories.rss");
-					MainActivity.this.runOnUiThread(new Runnable(){
-						@Override
-						public void run() {
-							setUpUiAfterParse(parser);
-						}
-					});
-				} catch (XmlPullParserException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				//download the image specified by the url
+				final byte[] bytes = Downloader.downloadBytes("http://theoutlawlife.files.wordpress.com/2013/01/oh-the-huge-manatee.jpg");
+				//make ui changes on ui thread
+				mainHandler.post(new Runnable(){
+					@Override
+					public void run() {
+						//get the image view
+						ImageView iv = (ImageView) findViewById(R.id.myfirstimage);
+						//set the image view to display the downloaded image
+						iv.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+					}
+				});
 			}
-        })).start();
+        }).start();
     }
-    /**
-     * set up the ui after we've downloaded and parsed the rss feed
-     * @param parser
-     */
-    private void setUpUiAfterParse(final MyPullParser parser){
-		TextView tv = (TextView) findViewById(R.id.mytxt);
-		//generate a string representation of everything that we downloaded
-		//and set the text view to it
-		tv.setText(parser.toString());
-		//this button, when clicked, will go to a new activity which
-		//will display the description for the item in a web view
-		Button btn = (Button) findViewById(R.id.to_descr);
-		btn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this,DescriptionActivity.class);
-				intent.putExtra("title", parser.getItems().get(0).title);
-				intent.putExtra("description", parser.getItems().get(0).description);
-				startActivity(intent);
-			}
-		});
-    }
+
 }
