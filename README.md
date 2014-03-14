@@ -1,2 +1,3 @@
-* Modified pull parser to parse an rss feed's title and description from each item. Remember the original code from pull parser was taken from http://developer.android.com/reference/org/xmlpull/v1/XmlPullParser.html
-* displayed description in a separate activity using a WebView
+* Cache directory and temporary files lesson
+* showed the differences in memory usage when downloading and displaying a large list of images.
+* first we store the images in a byte array and then we store the images in files stored in the cache directory

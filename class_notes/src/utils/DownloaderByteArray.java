@@ -5,8 +5,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.ByteBuffer;
-
-public class Downloader {
+/**
+ * download an image and store it in a byte array
+ * @author josh
+ *
+ */
+public class DownloaderByteArray {
 	public static final byte[] downloadBytes(String strUrl){
 		try {
 			URL url = new URL(strUrl);

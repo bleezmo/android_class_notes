@@ -1,8 +1,9 @@
 package utils;
 
-import com.example.class_notes.R;
+import java.io.File;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,18 +12,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-public class ByteImageAdapter extends BaseAdapter{
-	private static class ByteImage{
-		public byte[] bytes;
-		public ByteImage(byte[] bytes){
-			this.bytes = bytes;
-		}
-	}
-	private ByteImage[] images;
+import com.example.class_notes.R;
+/**
+ * set up an array of files stored in the cache dir, 
+ * each containing the image downloaded
+ * @author josh
+ *
+ */
+public class FileImageAdapter  extends BaseAdapter{
+	private File[] images;
 	private Activity ctx;
-	public ByteImageAdapter(Activity ctx, int imageCount){
+	public FileImageAdapter(Activity ctx, int imageCount){
 		this.ctx = ctx;
-		images = new ByteImage[imageCount];
+		images = new File[imageCount];
 	}
 	@Override
 	public int getCount() {
@@ -49,30 +51,33 @@ public class ByteImageAdapter extends BaseAdapter{
 			iv = (ImageView) convertView;
 		}
 		if(images[position] == null){
-			new Thread(new ByteImageDownloader(iv,images,position)).start();
+			//download the image in a separate thread
+			new Thread(new FileImageDownloader(ctx,iv,images,position)).start();
 		}else{
-			iv.setImageBitmap(BitmapFactory.decodeByteArray(images[position].bytes, 0, images[position].bytes.length, new BitmapFactory.Options()));
+			iv.setImageBitmap(BitmapFactory.decodeFile(images[position].getPath()));
 		}
 		return iv;
 	}
-	private static class ByteImageDownloader implements Runnable{
-		private ByteImage[] images;
+	private static class FileImageDownloader implements Runnable{
+		private File[] images;
 		private int position;
 		private ImageView iv;
-		public ByteImageDownloader(ImageView iv, ByteImage[] images, int position){
+		private Context ctx;
+		public FileImageDownloader(Context ctx, ImageView iv, File[] images, int position){
 			this.images = images;
 			this.position = position;
 			this.iv = iv;
+			this.ctx = ctx;
 		}
 		@Override
 		public void run() {
-			byte[] bytes = DownloaderByteArray.downloadBytes("http://theoutlawlife.files.wordpress.com/2013/01/oh-the-huge-manatee.jpg");
-			if(bytes != null){
-				images[position] = new ByteImage(bytes);
+			File file = DownloaderTempFile.downloadBytesToFile(ctx, "http://theoutlawlife.files.wordpress.com/2013/01/oh-the-huge-manatee.jpg");
+			if(file != null){
+				images[position] = file;
 				iv.post(new Runnable(){
 					@Override
 					public void run() {
-						iv.setImageBitmap(BitmapFactory.decodeByteArray(images[position].bytes, 0, images[position].bytes.length, new BitmapFactory.Options()));
+						iv.setImageBitmap(BitmapFactory.decodeFile(images[position].getPath()));
 						iv.invalidate();
 					}
 				});
