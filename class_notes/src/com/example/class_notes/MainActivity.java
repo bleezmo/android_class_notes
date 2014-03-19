@@ -2,15 +2,20 @@ package com.example.class_notes;
 
 import java.io.IOException;
 
-import utils.ByteImageAdapter;
-import utils.DownloaderByteArray;
-import utils.FileImageAdapter;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import utils.Downloader;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,18 +27,33 @@ import android.widget.TextView;
  * @author josh
  *
  */
-public class MainActivity extends Activity{
+public class MainActivity extends Activity implements Downloader.JSONDownloaderListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ListView lv = (ListView) findViewById(R.id.imagelist);
-		int imageCount = 100;
-		//because imageCount is large, ByteImageAdapter crashes because it
-		//is memory inefficient
-		//lv.setAdapter(new ByteImageAdapter(this,imageCount))
-		//we use file image adapter to manage the images in temporary files
-		lv.setAdapter(new FileImageAdapter(this,imageCount));
+        new Downloader.JSONAsyncDownloader(this).execute();
     }
+
+	@Override
+	public void onJSONRetrieved(JSONObject json) {
+		//Log.i("MainActivity","got json: "+json.toString());
+		ListView lv = (ListView) findViewById(R.id.arenalist);
+		try {
+			JSONArray games = json.
+					getJSONObject("sports_content").
+					getJSONObject("games").getJSONArray("game");
+			String[] arenas = new String[games.length()];
+			for(int i = 0; i < games.length(); i++){
+				arenas[i] = games.getJSONObject(i).getString("arena");
+			}
+			lv.setAdapter(new ArrayAdapter<String>(
+					this,android.R.layout.simple_list_item_1,arenas));
+		
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
