@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import utils.Downloader;
+import utils.SportsManager;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,11 +33,17 @@ public class MainActivity extends Activity implements Downloader.JSONDownloaderL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new Downloader.JSONAsyncDownloader(this).execute();
+        new Downloader.JSONAsyncDownloader(this).execute("http://data.nba.com/json/cms/noseason/scoreboard/20101229/games.json");
     }
 
 	@Override
 	public void onJSONRetrieved(JSONObject json) {
+		try {
+			//just run this to test to make sure the database is being populated correctly
+			new SportsManager(this).insertSports(json);
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
 		//Log.i("MainActivity","got json: "+json.toString());
 		ListView lv = (ListView) findViewById(R.id.arenalist);
 		try {

@@ -27,16 +27,16 @@ public class Downloader {
 	 * @author josh
 	 *
 	 */
-	public static class JSONAsyncDownloader extends AsyncTask<Void,Void,JSONObject>{	
+	public static class JSONAsyncDownloader extends AsyncTask<String,Void,JSONObject>{	
 		private JSONDownloaderListener listener;
 
 		public JSONAsyncDownloader(JSONDownloaderListener listener){
 			this.listener = listener;
 		}
 		@Override
-		protected JSONObject doInBackground(Void... params) {
+		protected JSONObject doInBackground(String... urls) {
 			String jsontext = Downloader
-					.downloadText("http://data.nba.com/json/cms/noseason/scoreboard/20101229/games.json")
+					.downloadText(urls[0])
 					.toString();
 			try {
 				JSONObject json = new JSONObject(jsontext);
