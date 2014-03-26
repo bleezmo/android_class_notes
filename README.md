@@ -1,3 +1,2 @@
-* created our sqlite database manager by extending the SQLiteOpenHelper
-* created sports table
-* added method to populate the table using json data
+* added custom cursor adapter to display list based on db
+* added click listener so that when clicked, removed item from list

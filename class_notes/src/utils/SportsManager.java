@@ -18,13 +18,13 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class SportsManager extends SQLiteOpenHelper{
 	//table name
-	private static final String TABLE_NAME = "sports";
+	public static final String TABLE_NAME = "sports";
 	//columns
-	private static final String ID = "id";
-	private static final String DATE = "date";
-	private static final String ARENA = "arena";
-	private static final String CITY = "city";
-	private static final String STATE = "state";
+	public static final String ID = "_id";
+	public static final String DATE = "date";
+	public static final String ARENA = "arena";
+	public static final String CITY = "city";
+	public static final String STATE = "state";
 	
 	//sql statement to create the sports table
 	private static final String CREATE_TABLE = "CREATE TABLE "+
