@@ -1,1 +1,1 @@
-* sample camera usage
+* Services and Service/Activity communication
