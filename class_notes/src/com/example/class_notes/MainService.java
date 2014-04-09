@@ -3,6 +3,8 @@ package com.example.class_notes;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 public class MainService extends Service implements GetMessageListener{
@@ -68,16 +71,37 @@ public class MainService extends Service implements GetMessageListener{
 	 * send the message to the client (MainActivity), if the client exists
 	 */
 	private void sendMessageToClient(){
-		if(clientMessenger != null && this.msg != null){
-			Message msg = Message.obtain();
-			msg.what = MESSAGE_RECEIVED;
-			Bundle data = new Bundle();
-			data.putString("message", this.msg);
-			msg.setData(data);
-			try {
-				clientMessenger.send(msg);
-			} catch (RemoteException e) {
-				e.printStackTrace();
+		if(this.msg != null){
+			if(clientMessenger != null){
+				//we have the client messenger, which means the app is running and is attached
+				//send the message we have received
+				Message msg = Message.obtain();
+				msg.what = MESSAGE_RECEIVED;
+				Bundle data = new Bundle();
+				data.putString("message", this.msg);
+				msg.setData(data);
+				try {
+					Log.i("MainService","sending message "+this.msg);
+					clientMessenger.send(msg);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+				//remember to stop the service when we don't need it anymore
+				stopSelf();
+			}else{
+				//if the client messenger isn't available, it means the user closed the app
+				//set up a notification for the user here
+				PendingIntent pintent = PendingIntent.getActivity(
+						this, 0, new Intent(this,MainActivity.class), 0);
+				NotificationCompat.Builder noti = 
+						new NotificationCompat.Builder(this)
+						.setSmallIcon(R.drawable.sucesskid)
+						.setContentIntent(pintent)
+						.setContentTitle("Message received")
+						.setContentText("Your message is waiting to be displayed")
+						.setAutoCancel(true);
+				NotificationManager nmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+				nmanager.notify(0, noti.build());
 			}
 		}
 	}

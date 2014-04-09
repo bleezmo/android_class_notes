@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class GetMessageTask extends AsyncTask<Void,Void,String>{
 	private GetMessageListener listener;
@@ -46,6 +47,7 @@ public class GetMessageTask extends AsyncTask<Void,Void,String>{
 					Thread.sleep(10000);
 					urlConnection = (HttpURLConnection) url.openConnection();
 				}
+				Log.i("GetMessageTask","got a message!");
 				String msg = getResponseContents(urlConnection);
 				urlConnection = null;
 				if(msg != null) return msg;

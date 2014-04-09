@@ -20,6 +20,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Handler;
 
@@ -37,7 +38,16 @@ public class MainActivity extends Activity {
 	private Messenger messenger = new Messenger(new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
+			Log.i("MainActivity","got message");
+			if(msg.what == MESSAGE_RECEIVED){
+				//we've received the message from the service
+				//now display it
+				Bundle data = msg.getData();
+				String message = data.getString("message");
+				Log.i("MainActivity","received message "+message);
+				TextView tv = (TextView) MainActivity.this.findViewById(R.id.message);
+				tv.setText(message);
+			}
 		}
 	});
 	//this is used as a callback by the service in order to tell the activity when the
