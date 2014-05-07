@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.class_notes.DetailsActivity"></activity>
+        <activity android:name="com.example.class_notes.SecondActivity"></activity>
     </application>
 
 </manifest>

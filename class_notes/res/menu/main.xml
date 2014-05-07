@@ -1,14 +1,12 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    	xmlns:AndroidClass="http://schemas.android.com/apk/res-auto" >
 
+    
+        <!-- need AndroidClass:showAsAction="ifRoom" to display in action bar -->
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        AndroidClass:showAsAction="ifRoom|withText"
+        android:icon="@drawable/ic_launcher"
         android:title="@string/action_settings"/>
-	<item 
-	    android:id="@+id/clear_text"
-	    android:orderInCategory="50"
-	    android:showAsAction="never"
-	    android:title="clear text"
-	    />
 </menu>
