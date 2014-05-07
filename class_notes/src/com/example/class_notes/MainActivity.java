@@ -33,30 +33,13 @@ import android.os.Handler;
  * @author josh
  *
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if(item.getItemId() == R.id.action_settings){
-			Intent i = new Intent(this,SecondActivity.class);
-			startActivity(i);
-		}
-		return super.onOptionsItemSelected(item);
-	}
-    
+    }   
     
 }
 

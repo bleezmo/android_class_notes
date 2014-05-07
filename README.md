@@ -1,1 +1,1 @@
-* action bar with up navigation
+* map - initial setup

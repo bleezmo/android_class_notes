@@ -1,1 +1,1 @@
-* Fragments - code to display in tablet mode combined with handset mode
+* action bar with up navigation
