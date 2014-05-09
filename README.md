@@ -1,1 +1,1 @@
-* map - initial setup
+* map - markers and click listeners
